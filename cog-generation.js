@@ -51,5 +51,6 @@ $(function() {
         $('body').append(div_element);
     };
 
-    make_cog("c1", 10, 50, 50, "clockwise", 10, 20, 4);
+    make_cog("c1", 10, 20, 50, "clockwise", 10, 23, 4);
+    make_cog("c2", 10, 42, 42, "anticlockwise", 10, 23, 4);
 });
