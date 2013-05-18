@@ -41,17 +41,27 @@
 
       /****** Spokes ******/
 
+      .spokecontainer{
+        width: 100%;
+        padding-bottom: 100%;
+        position: absolute;
+      }
+
       .spoke{
-        width: 20%;
-        height: 120%;
         border-radius: 15%;
         position: absolute;
         top: -10%;
         left: 50%; 
-        margin-left: -10%;
+      }
+
+      .odd .spoke{
+        height: 60%;
+        margin-bottom: 60%;
       }
 
       #c1 .spoke{
+        width: 30%;
+        margin-left: -15%;
         background: grey;
       }
 
@@ -59,16 +69,20 @@
         -webkit-transform: rotate(0deg);
       }
 
-      .s45{
-        -webkit-transform: rotate(45deg);
+      .s72{
+        -webkit-transform: rotate(72deg);
       }
 
-      .s90{
-        -webkit-transform: rotate(90deg);
+      .s144{
+        -webkit-transform: rotate(144deg);
       }
 
-      .s135{
-        -webkit-transform: rotate(135deg);
+      .s216{
+        -webkit-transform: rotate(216deg);
+      }
+
+      .s288{
+        -webkit-transform: rotate(288deg);
       }
 
       /****** Dressings ******/
@@ -122,11 +136,22 @@
     
     <div id="c1" class="cogcontainer">
       <div class="cog">
-        <div class="spokes">
-          <div class="s0 spoke"></div>
-          <div class="s45 spoke"></div>
-          <div class="s90 spoke"></div>
-          <div class="s135 spoke"></div>
+        <div class="spokes odd">
+          <div class="s0 spokecontainer">
+            <div class="spoke"></div>
+          </div>
+          <div class="s72 spokecontainer">
+            <div class="spoke"></div>
+          </div>
+          <div class="s144 spokecontainer">
+            <div class="spoke"></div>
+          </div>
+          <div class="s216 spokecontainer">
+            <div class="spoke"></div>
+          </div>
+          <div class="s288 spokecontainer">
+            <div class="spoke"></div>
+          </div>
         </div>
         <div class="dressings">
           <div class="d0 dressing"></div>
