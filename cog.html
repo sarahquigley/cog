@@ -16,8 +16,11 @@
       /****** Cog ******/
 
       .cogcontainer{
-        width: 20%;
         position: absolute;
+      }
+
+      #c1{
+        width: 20%;
         top: 50%;
         left: 50%;
         margin-top: -10%;
@@ -32,7 +35,7 @@
         position: relative;
       }
 
-      #c1{
+      #c1 .cog{
         background: black;
       }
 
@@ -41,7 +44,6 @@
       .spoke{
         width: 20%;
         height: 120%;
-        background: grey;
         border-radius: 15%;
         position: absolute;
         top: -10%;
@@ -49,23 +51,28 @@
         margin-left: -10%;
       }
 
-      #s0{
+      #c1 .spoke{
+        background: grey;
+      }
+
+      .s0{
         -webkit-transform: rotate(0deg);
       }
 
-      #s45{
+      .s45{
         -webkit-transform: rotate(45deg);
       }
 
-      #s90{
+      .s90{
         -webkit-transform: rotate(90deg);
       }
 
-      #s135{
+      .s135{
         -webkit-transform: rotate(135deg);
       }
 
-      /****** Dressing ******/
+      /****** Dressings ******/
+
       .dressing{
         position: absolute;
         top: 50%;
@@ -103,19 +110,23 @@
         100% { -webkit-transform: rotate(360deg); }
       }
 
+      @-webkit-keyframes anticlockwise{
+        100% { -webkit-transform: rotate(-360deg); }
+      }
+
     </style>
 
   </head>
 
   <body>
     
-    <div class="cogcontainer">
-      <div id="c1" class="cog">
+    <div id="c1" class="cogcontainer">
+      <div class="cog">
         <div class="spokes">
-          <div id="s0" class="spoke"></div>
-          <div id="s45" class="spoke"></div>
-          <div id="s90" class="spoke"></div>
-          <div id="s135" class="spoke"></div>
+          <div class="s0 spoke"></div>
+          <div class="s45 spoke"></div>
+          <div class="s90 spoke"></div>
+          <div class="s135 spoke"></div>
         </div>
         <div class="dressings">
           <div class="d0 dressing"></div>
