@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <title>Generated Cogs</title>
+
+    <script type="text/template" id="spoke-angle-styles">
+    {{#angles}}
+      .s{{degrees}}{
+        -webkit-transform: rotate({{degrees}}deg);
+      }
+    {{/angles}}
+    </script>
+
+    <script type="text/template" id="cog-styles">
+      /* Args:
+        cog_id: unique id string.
+
+        diameter, radius, xpos, ypos:
+        All specified in range [0,100], percentage of parent width.
+
+        direction: "clockwise" or "anticlockwise"
+        rotation_period: period in seconds.
+
+        spoke_width, half_spoke_width: URGH
+      */
+
+      #{{cog_id}} {
+        width: {{diameter}}%;
+        top: {{ypos}}%;
+        left: {{xpos}}%;
+        margin-top: -{{radius}}%;
+        margin-left: -{{radius}}%;
+        -webkit-animation: {{direction}} {{rotation_period}}s linear infinite;
+      }
+
+      #{{cog_id}} .spoke{
+        width: {{spoke_width}}%;
+        margin-left: -{{half_spoke_width}}%;
+      }
+      
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="global.css"></style>
+
+  </head>
+
+  <body>
+    
+    <div id="c1" class="cogcontainer">
+      <div class="cog">
+        <div class="spokes even">
+          <div class="s0 spoke"></div>
+          <div class="s45 spoke"></div>
+          <div class="s90 spoke"></div>
+          <div class="s135 spoke"></div>
+        </div>
+        <div class="dressings">
+          <div class="d0 dressing"></div>
+          <div class="d1 dressing"></div>
+          <div class="d2 dressing"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src="https://raw.github.com/wycats/handlebars.js/1.0.0-rc.4/dist/handlebars.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://underscorejs.org/underscore-min.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        var spoke_angle_styles_template = Handlebars.compile($('#spoke-angle-styles').html());
+
+        var angles = _.map( _.range(0, 360, 5), function(i) {
+          return { degrees: i }
+        });
+
+        var spoke_angle_style_element = $('<style></style>');
+        spoke_angle_style_element.html(
+          spoke_angle_styles_template({angles: angles})
+        );
+        $('head').append(spoke_angle_style_element);
+      });
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        var style_template = Handlebars.compile($('#cog-styles').html());
+
+        var make_cog = function(cog_id, radius, xpos, ypos, direction, rotation_period, spoke_width) {
+          var template_params = {
+            cog_id: cog_id,
+            radius: radius,
+            diameter: 2 * radius,
+            xpos: xpos,
+            ypos: ypos,
+            direction: direction,
+            rotation_period: rotation_period,
+            spoke_width: spoke_width,
+            half_spoke_width: spoke_width / 2,
+          };
+
+          var style_element = $('<style></style>');
+          style_element.html(
+            style_template(template_params)
+          );
+          $('head').append(style_element);
+        };
+
+        make_cog("c1", 10, 50, 50, "clockwise", 10, 20);
+      });
+    </script>
+
+  </body>
+
+</html>

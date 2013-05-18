@@ -1,0 +1,79 @@
+
+
+html, body{
+  height: 100%;
+  margin: 0;
+}
+
+/****** Cog globals - styles applied to every cog ******/
+
+.cogcontainer{
+  position: absolute;
+}
+
+.cog{
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  position: relative;
+  background: black;
+}
+
+/****** Spokes ******/
+
+.spoke{
+  border-radius: 15%;
+  position: absolute;
+  top: -10%;
+  left: 50%; 
+  background: grey;
+}
+
+.even .spoke{
+  height: 120%;
+}
+
+/****** Dressings ******/
+
+.dressing{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+}
+
+.d0{
+  width: 50%;
+  padding-bottom: 50%;
+  background: black;
+  margin-top: -25%;
+  margin-left: -25%;
+}
+
+.d1{
+  width: 40%;
+  padding-bottom: 40%;
+  background: grey;
+  margin-top: -20%;
+  margin-left: -20%;
+}
+
+.d2{
+  width: 24%;
+  padding-bottom: 24%;
+  background: black;
+  margin-top: -12%;
+  margin-left: -12%;
+}
+
+/****** Keyframes ******/
+
+@-webkit-keyframes clockwise{
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes anticlockwise{
+  100% { -webkit-transform: rotate(-360deg); }
+}
+
+
