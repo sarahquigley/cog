@@ -9,7 +9,11 @@
     <script type="text/template" id="spoke-angle-styles">
     {{#angles}}
       .s{{degrees}}{
+        transform: rotate({{degrees}}deg);
         -webkit-transform: rotate({{degrees}}deg);
+        -moz-transform: rotate({{degrees}}deg);
+        -o-transform: rotate({{degrees}}deg);
+        -ms-transform: rotate({{degrees}}deg);
       }
     {{/angles}}
     </script>
@@ -33,7 +37,10 @@
         left: {{xpos}}%;
         margin-top: -{{radius}}%;
         margin-left: -{{radius}}%;
+        animation: {{direction}} {{rotation_period}}s linear infinite;
         -webkit-animation: {{direction}} {{rotation_period}}s linear infinite;
+        -moz-animation: {{direction}} {{rotation_period}}s linear infinite;
+        -o-animation: {{direction}} {{rotation_period}}s linear infinite;
       }
 
       #{{cog_id}} .spoke{
