@@ -51,6 +51,10 @@ $(function() {
         $('#canvas').append(div_element);
     };
 
-    make_cog("c1", 10, 20, 20, "clockwise", 10, 23, 4);
-    make_cog("c2", 10, 38.5, 32.2, "anticlockwise", 10, 23, 4);
+    make_cog("c1", 10, 3.75, 32.2, "anticlockwise", 10, 23, 4);
+    make_cog("c2", 10, 22.25, 20, "clockwise", 10, 23, 4);
+    make_cog("c3", 10, 40.75, 32.2, "anticlockwise", 10, 23, 4);
+    make_cog("c4", 10, 59.25, 20, "clockwise", 10, 23, 4);
+    make_cog("c5", 10, 77.75, 32.2, "anticlockwise", 10, 23, 4);
+    make_cog("c6", 10, 96.25, 20, "clockwise", 10, 23, 4);
 });
