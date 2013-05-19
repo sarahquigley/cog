@@ -76,12 +76,64 @@ html, body{
 
 /****** Keyframes ******/
 
+@keyframes clockwise{
+  100% {
+    transform: rotate(360deg); 
+    -webkit-transform: rotate(360deg); 
+    -moz-transform: rotate(360deg); 
+    -o-transform: rotate(360deg); 
+    -ms-transform: rotate(360deg); 
+  }
+}
+
+@keyframes anticlockwise{
+  100% {
+    transform: rotate(-360deg); 
+    -webkit-transform: rotate(-360deg); 
+    -moz-transform: rotate(-360deg); 
+    -o-transform: rotate(-360deg); 
+    -ms-transform: rotate(-360deg); 
+  }
+}
+
 @-webkit-keyframes clockwise{
-  100% { -webkit-transform: rotate(360deg); }
+  100% {
+    transform: rotate(360deg); 
+    -webkit-transform: rotate(360deg); 
+  }
 }
 
 @-webkit-keyframes anticlockwise{
-  100% { -webkit-transform: rotate(-360deg); }
+  100% {
+    transform: rotate(-360deg); 
+    -webkit-transform: rotate(-360deg);
+  }
 }
 
+@-moz-keyframes clockwise{
+  100% {
+    transform: rotate(360deg); 
+    -moz-transform: rotate(360deg); 
+  }
+}
 
+@-moz-keyframes anticlockwise{
+  100% {
+    transform: rotate(-360deg); 
+    -moz-transform: rotate(-360deg);
+  }
+}
+
+@-o-keyframes clockwise{
+  100% {
+    transform: rotate(360deg); 
+    -moz-transform: rotate(360deg); 
+  }
+}
+
+@-o-keyframes anticlockwise{
+  100% {
+    transform: rotate(-360deg); 
+    -moz-transform: rotate(-360deg);
+  }
+}
