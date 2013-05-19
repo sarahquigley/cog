@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <title>Generated Cogs</title>
+
+    <script type="text/template" id="spoke-angle-styles">
+    {{#angles}}
+      .s{{degrees}}{
+        -webkit-transform: rotate({{degrees}}deg);
+      }
+    {{/angles}}
+    </script>
+
+    <script type="text/template" id="cog-styles">
+      /* Args:
+        cog_id: unique id string.
+
+        diameter, radius, xpos, ypos:
+        All specified in range [0,100], percentage of parent width.
+
+        direction: "clockwise" or "anticlockwise"
+        rotation_period: period in seconds.
+
+        spoke_width, half_spoke_width: URGH
+      */
+
+      #{{cog_id}} {
+        width: {{diameter}}%;
+        top: {{ypos}}%;
+        left: {{xpos}}%;
+        margin-top: -{{radius}}%;
+        margin-left: -{{radius}}%;
+        -webkit-animation: {{direction}} {{rotation_period}}s linear infinite;
+      }
+
+      #{{cog_id}} .spoke{
+        width: {{spoke_width}}%;
+        margin-left: -{{half_spoke_width}}%;
+      }
+      
+    </script>
+
+    <script type="text/template" id="cog-elements">
+      <div id="{{cog_id}}" class="cogcontainer">
+        <div class="cog">
+          <div class="spokes even">
+            {{#spokes}}
+            <div class="s{{degrees}} spoke"></div>
+            {{/spokes}}
+          </div>
+          <div class="dressings">
+            <div class="d0 dressing"></div>
+            <div class="d1 dressing"></div>
+            <div class="d2 dressing"></div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="global.css"></style>
+
+    <script type="text/javascript" charset="utf-8" src="https://raw.github.com/wycats/handlebars.js/1.0.0-rc.4/dist/handlebars.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://underscorejs.org/underscore-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cog-generation.js"></script>
+  </head>
+
+  <body>
+    <div id="canvas">
+    </div>
+  </body>
+
+</html>

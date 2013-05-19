@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <title>Cog</title>
+
+    <style>
+
+      html, body{
+        height: 100%;
+        margin: 0;
+      }
+
+      /****** Cog ******/
+
+      .cogcontainer{
+        position: absolute;
+      }
+
+      #c1{
+        width: 20%;
+        top: 50%;
+        left: 50%;
+        margin-top: -10%;
+        margin-left: -10%;
+        -webkit-animation: clockwise 10s linear infinite;
+      }
+
+      .cog{
+        width: 100%;
+        padding-bottom: 100%;
+        border-radius: 50%;
+        position: relative;
+      }
+
+      #c1 .cog{
+        background: black;
+      }
+
+      /****** Spokes ******/
+
+      .spoke{
+        border-radius: 15%;
+        position: absolute;
+        top: -10%;
+        left: 50%; 
+      }
+      
+      .even .spoke{
+        height: 120%;
+      }
+
+      #c1 .spoke{
+        width: 20%;
+        margin-left: -10%;
+        background: grey;
+      }
+
+      .s0{
+        -webkit-transform: rotate(0deg);
+      }
+
+      .s45{
+        -webkit-transform: rotate(45deg);
+      }
+
+      .s90{
+        -webkit-transform: rotate(90deg);
+      }
+
+      .s135{
+        -webkit-transform: rotate(135deg);
+      }
+
+      /****** Dressings ******/
+
+      .dressing{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+      }
+
+      .d0{
+        width: 50%;
+        padding-bottom: 50%;
+        background: black;
+        margin-top: -25%;
+        margin-left: -25%;
+      }
+
+      .d1{
+        width: 40%;
+        padding-bottom: 40%;
+        background: grey;
+        margin-top: -20%;
+        margin-left: -20%;
+      }
+
+      .d2{
+        width: 24%;
+        padding-bottom: 24%;
+        background: black;
+        margin-top: -12%;
+        margin-left: -12%;
+      }
+
+      /****** Keyframes ******/
+
+      @-webkit-keyframes clockwise{
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @-webkit-keyframes anticlockwise{
+        100% { -webkit-transform: rotate(-360deg); }
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    
+    <div id="c1" class="cogcontainer">
+      <div class="cog">
+        <div class="spokes even">
+          <div class="s0 spoke"></div>
+          <div class="s45 spoke"></div>
+          <div class="s90 spoke"></div>
+          <div class="s135 spoke"></div>
+        </div>
+        <div class="dressings">
+          <div class="d0 dressing"></div>
+          <div class="d1 dressing"></div>
+          <div class="d2 dressing"></div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
