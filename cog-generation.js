@@ -48,9 +48,9 @@ $(function() {
                 spokes: spoke_objects,
             })
         );
-        $('body').append(div_element);
+        $('#canvas').append(div_element);
     };
 
-    make_cog("c1", 10, 20, 50, "clockwise", 10, 23, 4);
-    make_cog("c2", 10, 42, 42, "anticlockwise", 10, 23, 4);
+    make_cog("c1", 10, 20, 20, "clockwise", 10, 23, 4);
+    make_cog("c2", 10, 38.5, 32.2, "anticlockwise", 10, 23, 4);
 });
