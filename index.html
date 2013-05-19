@@ -4,127 +4,73 @@
 
   <head>
 
-    <title>Cog</title>
+    <title>Generated Cogs</title>
 
-    <style>
+    <script type="text/template" id="spoke-angle-styles">
+    {{#angles}}
+      .s{{degrees}}{
+        -webkit-transform: rotate({{degrees}}deg);
+      }
+    {{/angles}}
+    </script>
 
-      html, body{
-        height: 100%;
-        margin: 0;
+    <script type="text/template" id="cog-styles">
+      /* Args:
+        cog_id: unique id string.
+
+        diameter, radius, xpos, ypos:
+        All specified in range [0,100], percentage of parent width.
+
+        direction: "clockwise" or "anticlockwise"
+        rotation_period: period in seconds.
+
+        spoke_width, half_spoke_width: URGH
+      */
+
+      #{{cog_id}} {
+        width: {{diameter}}%;
+        top: {{ypos}}%;
+        left: {{xpos}}%;
+        margin-top: -{{radius}}%;
+        margin-left: -{{radius}}%;
+        -webkit-animation: {{direction}} {{rotation_period}}s linear infinite;
       }
 
-      /****** Cog ******/
-
-      .cogcontainer{
-        width: 20%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -10%;
-        margin-left: -10%;
-        -webkit-animation: clockwise 10s linear infinite;
+      #{{cog_id}} .spoke{
+        width: {{spoke_width}}%;
+        margin-left: -{{half_spoke_width}}%;
       }
+      
+    </script>
 
-      .cog{
-        width: 100%;
-        padding-bottom: 100%;
-        border-radius: 50%;
-        position: relative;
-      }
+    <script type="text/template" id="cog-elements">
+      <div id="{{cog_id}}" class="cogcontainer">
+        <div class="cog">
+          <div class="spokes even">
+            {{#spokes}}
+            <div class="s{{degrees}} spoke"></div>
+            {{/spokes}}
+          </div>
+          <div class="dressings">
+            <div class="d0 dressing"></div>
+            <div class="d1 dressing"></div>
+            <div class="d2 dressing"></div>
+          </div>
+        </div>
+      </div>
+    </script>
 
-      #c1{
-        background: black;
-      }
+    <link rel="stylesheet" type="text/css" href="global.css"></style>
 
-      /****** Spokes ******/
-
-      .spoke{
-        width: 20%;
-        height: 120%;
-        background: grey;
-        border-radius: 15%;
-        position: absolute;
-        top: -10%;
-        left: 50%; 
-        margin-left: -10%;
-      }
-
-      #s0{
-        -webkit-transform: rotate(0deg);
-      }
-
-      #s45{
-        -webkit-transform: rotate(45deg);
-      }
-
-      #s90{
-        -webkit-transform: rotate(90deg);
-      }
-
-      #s135{
-        -webkit-transform: rotate(135deg);
-      }
-
-      /****** Dressing ******/
-      .dressing{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        border-radius: 50%;
-      }
-
-      .d0{
-        width: 50%;
-        padding-bottom: 50%;
-        background: black;
-        margin-top: -25%;
-        margin-left: -25%;
-      }
-
-      .d1{
-        width: 40%;
-        padding-bottom: 40%;
-        background: grey;
-        margin-top: -20%;
-        margin-left: -20%;
-      }
-
-      .d2{
-        width: 24%;
-        padding-bottom: 24%;
-        background: black;
-        margin-top: -12%;
-        margin-left: -12%;
-      }
-
-      /****** Keyframes ******/
-
-      @-webkit-keyframes clockwise{
-        100% { -webkit-transform: rotate(360deg); }
-      }
-
-    </style>
-
+    <script type="text/javascript" charset="utf-8" src="https://raw.github.com/wycats/handlebars.js/1.0.0-rc.4/dist/handlebars.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://underscorejs.org/underscore-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cog-generation.js"></script>
   </head>
 
   <body>
-    
-    <div class="cogcontainer">
-      <div id="c1" class="cog">
-        <div class="spokes">
-          <div id="s0" class="spoke"></div>
-          <div id="s45" class="spoke"></div>
-          <div id="s90" class="spoke"></div>
-          <div id="s135" class="spoke"></div>
-        </div>
-        <div class="dressings">
-          <div class="d0 dressing"></div>
-          <div class="d1 dressing"></div>
-          <div class="d2 dressing"></div>
-        </div>
-      </div>
+    <div id="canvas">
     </div>
-
   </body>
 
 </html>
