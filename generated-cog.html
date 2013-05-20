@@ -53,9 +53,11 @@
     <script type="text/template" id="cog-elements">
       <div id="{{cog_id}}" class="cogcontainer">
         <div class="cog">
-          <div class="spokes even">
+          <div class="spokes odd">
             {{#spokes}}
-            <div class="s{{degrees}} spoke"></div>
+            <div class="s{{degrees}} spokecontainer">
+              <div class="spoke"></div>
+            </div>
             {{/spokes}}
           </div>
           <div class="dressings">

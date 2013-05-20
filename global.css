@@ -37,8 +37,23 @@ html, body{
   background: grey;
 }
 
+/* Even cog only */
+
 .even .spoke{
   height: 120%;
+}
+
+/* Odd cog only */
+
+.spokecontainer{
+  width: 100%;
+  padding-bottom: 100%;
+  position: absolute;
+}
+
+.odd .spoke{
+  height: 60%;
+  margin-bottom: 60%;
 }
 
 /****** Dressings ******/
