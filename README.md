@@ -3,7 +3,7 @@ cog
 
 ...wheels turn.
 
-View live version: <a href="http://sarahquigley.github.io/cog/">Watch cog wheels turn.</a>
+View live version: <a href="http://sarahquigley.net/cog/">Watch cog wheels turn.</a>
 
 ## Please note
 
