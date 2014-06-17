@@ -6,7 +6,7 @@
 
     <title>Generated Cogs</title>
 
-    <script type="text/template" id="spoke-angle-styles">
+    <script type="text/template" id="spoke-angle-styles-template">
     {{#angles}}
       .s{{degrees}}{
         transform: rotate({{degrees}}deg);
@@ -18,7 +18,7 @@
     {{/angles}}
     </script>
 
-    <script type="text/template" id="cog-styles">
+    <script type="text/template" id="cog-styles-template">
       /* Args:
         cog_id: unique id string.
 
@@ -31,27 +31,26 @@
         spoke_width, half_spoke_width: URGH
       */
 
-      #{{cog_id}} {
+      #{{id}} {
         width: {{diameter}}%;
-        top: {{ypos}}%;
-        left: {{xpos}}%;
+        top: {{pos.y}}%;
+        left: {{pos.x}}%;
         margin-top: -{{radius}}%;
         margin-left: -{{radius}}%;
-        animation: {{direction}} {{rotation_period}}s linear infinite;
-        -webkit-animation: {{direction}} {{rotation_period}}s linear infinite;
+        //animation: {{direction}} {{rotation_period}}s linear infinite;
+        //-webkit-animation: {{direction}} {{rotation_period}}s linear infinite;
         -moz-animation: {{direction}} {{rotation_period}}s linear infinite;
         -o-animation: {{direction}} {{rotation_period}}s linear infinite;
       }
 
-      #{{cog_id}} .spoke{
+      #{{id}} .spoke{
         width: {{spoke_width}}%;
         margin-left: -{{half_spoke_width}}%;
       }
-      
     </script>
 
-    <script type="text/template" id="cog-elements">
-      <div id="{{cog_id}}" class="cogcontainer">
+    <script type="text/template" id="cog-elements-template">
+      <div id="{{id}}" class="cogcontainer">
         <div class="cog">
           <div class="spokes odd">
             {{#spokes}}
@@ -69,7 +68,7 @@
       </div>
     </script>
 
-    <link rel="stylesheet" type="text/css" href="global.css"></style>
+    <link rel="stylesheet" type="text/css" href="global.css">
 
     <script type="text/javascript" charset="utf-8" src="handlebars.js"></script>
     <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>

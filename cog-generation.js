@@ -1,7 +1,7 @@
 $(function() {
-    var spoke_angle_styles_template = Handlebars.compile($('#spoke-angle-styles').html());
+    var spoke_angle_styles_template = Handlebars.compile($('#spoke-angle-styles-template').html());
 
-    var angles = _.map( _.range(0, 360, 5), function(i) {
+    var angles = _.map( _.range(0, 360, 1), function(i) {
         return { degrees: i }
     });
 
@@ -12,49 +12,56 @@ $(function() {
     $('head').append(spoke_angle_style_element);
 });
 
-$(function() {
-    var style_template = Handlebars.compile($('#cog-styles').html());
-    var element_template = Handlebars.compile($('#cog-elements').html());
 
-    var make_cog = function(cog_id, radius, xpos, ypos, direction, rotation_period, spoke_width, num_spokes) {
-        var template_params = {
-            cog_id: cog_id,
-            radius: radius,
-            diameter: 2 * radius,
-            xpos: xpos,
-            ypos: ypos,
-            direction: direction,
-            rotation_period: rotation_period,
-            spoke_width: spoke_width,
-            half_spoke_width: spoke_width / 2,
-        };
+// Args: object with keys id, pos, direction, rotation_period, num_spokes, spoke_width
 
-        // Create cog style
-        var style_element = $('<style></style>');
-        style_element.html(
-            style_template(template_params)
-            );
-        $('head').append(style_element);
+var Cog = function(args){
+  this.id = args.id;
+  this.pos = args.pos;
+  this.direction = args.direction;
+  this.rotation_period = args.rotation_period;
+  this.num_spokes = args.num_spokes;
+  this.radius = Math.abs(args.spoke_width / (2 * Math.sin(Math.PI/(args.num_spokes * 2))));
+  this.diameter = this.radius * 2;
+  this.spoke_width = (args.spoke_width / this.diameter) * 100;
+  this.half_spoke_width = this.spoke_width / 2;
+  this.spoke_angles = _.map(_.range(0, 360, 360 / args.num_spokes), function(degrees) {
+    return {degrees: degrees};
+  });
+}
 
-        // Create cog element
-        var spoke_angles = _.range(0, 360, 360 / num_spokes);
-        var spoke_objects = _.map(spoke_angles, function(degrees) {
-            return {degrees: degrees};
-        });
-        var div_element = $('<div>');
-        div_element.html(
-            element_template({
-                cog_id: cog_id,
-                spokes: spoke_objects,
-            })
+Cog.prototype = {
+  templates: {
+    styles: Handlebars.compile($('#cog-styles-template').html()),
+    elements: Handlebars.compile($('#cog-elements-template').html())
+  },
+
+  renderStyles: function(){
+    var $el = $('<style></style>');
+    $el.html(
+        this.templates.styles(this)
         );
-        $('#canvas').append(div_element);
-    };
+    $('head').append($el);
+  },
 
-    make_cog("c1", 10, 3.75, 32.2, "anticlockwise", 10, 23, 8);
-    make_cog("c2", 10, 22.25, 20, "clockwise", 10, 23, 8);
-    make_cog("c3", 10, 40.75, 32.2, "anticlockwise", 10, 23, 8);
-    make_cog("c4", 10, 59.25, 20, "clockwise", 10, 23, 8);
-    make_cog("c5", 10, 77.75, 32.2, "anticlockwise", 10, 23, 8);
-    make_cog("c6", 10, 96.25, 20, "clockwise", 10, 23, 8);
+  renderElements: function(){
+    var $el = $('<div>');
+    $el.html(
+        this.templates.elements({
+          id: this.id,
+          spokes: this.spoke_angles,
+        })
+        );
+    $('#canvas').append($el);
+  },
+
+  render: function(){
+    this.renderStyles();
+    this.renderElements();
+  }
+}
+
+$(function() {
+    new Cog({id: "c2", pos: {x: 22.25, y: 20}, direction: "clockwise", rotation_period: 10, num_spokes: 3, spoke_width: 5}).render();
+
 });
