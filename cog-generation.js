@@ -1,18 +1,3 @@
-$(function() {
-    var spoke_angle_styles_template = Handlebars.compile($('#spoke-angle-styles-template').html());
-
-    var angles = _.map( _.range(0, 360, 1), function(i) {
-        return { degrees: i }
-    });
-
-    var spoke_angle_style_element = $('<style></style>');
-    spoke_angle_style_element.html(
-        spoke_angle_styles_template({angles: angles})
-        );
-    $('head').append(spoke_angle_style_element);
-});
-
-
 // Args: object with keys id, pos, direction, rotation_period, num_spokes, spoke_width
 
 var Cog = function(args){
@@ -26,7 +11,7 @@ var Cog = function(args){
   this.spoke_width = (args.spoke_width / this.diameter) * 100;
   this.half_spoke_width = this.spoke_width / 2;
   this.spoke_angles = _.map(_.range(0, 360, 360 / args.num_spokes), function(degrees) {
-    return {degrees: degrees};
+    return {degrees: Math.round(degrees)};
   });
 }
 
@@ -62,6 +47,52 @@ Cog.prototype = {
 }
 
 $(function() {
-    new Cog({id: "c2", pos: {x: 22.25, y: 20}, direction: "clockwise", rotation_period: 10, num_spokes: 3, spoke_width: 5}).render();
+  var initial_args = {
+    pos: {x: 0, y: 50},
+    rotation_period: 10,
+    spoke_width: _.random(2, 7)
+  };
 
+  var cogs = [];
+
+  _.each(_.range(20), function(n){
+
+    var args = _.extend(initial_args, {
+      id: "c" + n,
+      direction: n%2 === 0 ? "clockwise" : "anticlockwise",
+      num_spokes: _.random(3, 15)
+    });
+
+    var cog = new Cog(args);
+    if(!_.isEmpty(cogs)){
+      var prev_cog = _.last(cogs);
+      var hypotenuse = prev_cog.radius + (prev_cog.radius * 0.15) + cog.radius + (cog.radius * 0.15);
+      var angle = _.random(-Math.PI/4, Math.PI/4);
+      var opposite = hypotenuse * Math.sin(angle);
+      var adjacent = hypotenuse * Math.cos(angle);
+      cog.pos = {
+        x: prev_cog.pos.x + adjacent,
+        y: prev_cog.pos.y + opposite
+      }
+    } else {
+    }
+    cogs.push(cog);
+    cog.render();
+  });
+
+  var spoke_angles = [];
+  _.each(cogs, function(cog){
+    spoke_angles = spoke_angles.concat(cog.spoke_angles);
+  });
+
+  console.log(spoke_angles);
+
+  var spoke_angle_styles_template = Handlebars.compile($('#spoke-angle-styles-template').html());
+
+  var $el = $('<style></style>');
+  $el.html(
+      spoke_angle_styles_template({angles: spoke_angles})
+      );
+  $('head').append($el);
+  
 });
